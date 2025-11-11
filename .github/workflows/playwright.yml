@@ -14,30 +14,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout code
+      #  Checkout code
       - uses: actions/checkout@v4
 
-      # 2️⃣ Setup Node.js
+      #  Setup Node.js
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*
 
-      # 3️⃣ Install dependencies
+      #  Install dependencies
       - name: Install dependencies
         run: npm install
 
-      # 4️⃣ Install Playwright browsers
+      #  Install Playwright browsers
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
-      # 5️⃣ Run Playwright tests
+      #  Run Playwright tests
       - name: Run Playwright tests
         run: npx playwright test --reporter=html
         env:
           CI: true
           GOOGLE_ACCESS_TOKEN: ${{ secrets.GOOGLE_ACCESS_TOKEN}}
 
-      # 6️⃣ Upload Playwright HTML report (optional)
+      #  Upload Playwright HTML report (optional)
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:

@@ -2,44 +2,42 @@ name: Playwright Tests
 
 on:
   push:
-    branches: ["main"]
+    branches: [ main, master ]
   pull_request:
-    branches: ["main"]
+    branches: [ main, master ]
   schedule:
-    - cron: '0 0 * * 1'  # Every Monday at 00:00 UTC
+    - cron: '*/5 * * * *'   # Run every 5 minutes
 
 jobs:
   test:
+    timeout-minutes: 60
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [18.x]
 
     steps:
       # 1️⃣ Checkout code
       - uses: actions/checkout@v4
 
-      # 2️⃣ Setup Node.js (no caching since no package-lock.json)
-      - name: Setup Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+      # 2️⃣ Setup Node.js
+      - uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: lts/*
 
-      # 3️⃣ Install dependencies & Playwright browsers
+      # 3️⃣ Install dependencies
       - name: Install dependencies
-        run: |
-          npm install
-          npx playwright install --with-deps
+        run: npm install
 
-      # 4️⃣ Run Playwright tests (headless, retries, screenshots/videos on failure)
-      - name: Run Tests
+      # 4️⃣ Install Playwright browsers
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      # 5️⃣ Run Playwright tests
+      - name: Run Playwright tests
         run: npx playwright test --reporter=html
 
-      # ✅ Optional: you can remove this step if you don't want reports uploaded
-      # - name: Upload HTML Report
-      #   if: always()
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: playwright-report
-      #     path: playwright-report/
+      # 6️⃣ Upload Playwright HTML report (optional)
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30

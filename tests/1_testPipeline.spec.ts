@@ -9,9 +9,6 @@ import { AddItem } from "../pages/AddItem.page";
 import { ItemModel } from "../models/ItemModel";
 import { ResetPassword } from "../pages/ResetPassword.page";
 import * as dotenv from "dotenv";
-import fs from 'fs';
-import path from 'path';
-
 import { UploadImage } from "../pages/UploadImage.page";
 dotenv.config({ override: true });
 
@@ -26,9 +23,6 @@ test.describe.serial("User Registration", async () => {
     test.afterAll(async () => {
         await page.close();
     })
-
-    const userDataPath = path.resolve('./resources/userData.json');
-    const userData = JSON.parse(fs.readFileSync(userDataPath, 'utf-8')); 
 
     test("Create New User", async () => {
         await page.goto("https://dailyfinance.roadtocareer.net/");
@@ -46,7 +40,9 @@ test.describe.serial("User Registration", async () => {
         await registerUser.userRegistration(person);
 
         saveJsonData(person, "./resources/userData.json");
-        await page.waitForTimeout(5000);
+        // saveEnv("userEmail", person.email);
+        // saveEnv("userPassword", person.password);
+        await page.waitForTimeout(10000);
         let latestEmail = await readLatestEmail();
         console.log(latestEmail);
         expect(latestEmail).toContain("Welcome to our platform");
@@ -108,7 +104,7 @@ test.describe.serial("User Registration", async () => {
         await page.waitForTimeout(5000);
         let lastEmail = await readLatestEmail();
         console.log(lastEmail);
-        await page.waitForTimeout(5000);
+        
         const urlRegex = /(https?:\/\/[^\s]+)/;
         const match = lastEmail.match(urlRegex);
 
@@ -116,12 +112,13 @@ test.describe.serial("User Registration", async () => {
             const resetUrl = new URL(match[0]);
             console.log("Navigating to:", resetUrl);
             await page.goto(resetUrl.href, { waitUntil: "domcontentloaded" });
-            const newPassword = "newPassword";
+            const newPassword = "4321";
             saveEnv("userPassword", newPassword);
             await reset.doInputNewPassword(newPassword);
         } else {
             throw new Error("No reset link found in email");
         }
+        await page.waitForTimeout(10000);
     })
 
     test("User can upload image", async () => {

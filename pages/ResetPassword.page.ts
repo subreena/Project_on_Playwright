@@ -1,6 +1,4 @@
 import {Page} from '@playwright/test';
-import { readLatestEmail } from '../services/Gmail_Read.service';
-
 
 export class ResetPassword{
     constructor(private page:Page){ }

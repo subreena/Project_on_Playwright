@@ -101,10 +101,10 @@ test.describe.serial("User Registration", async () => {
         let resetEmail = getLastUser("./resources/userData.json").email;
         saveEnv("userEmail", resetEmail);
         await reset.doResetPassword(resetEmail)
-        await page.waitForTimeout(5000);
+        await page.waitForTimeout(10000);
         let lastEmail = await readLatestEmail();
         console.log(lastEmail);
-        
+           await page.waitForTimeout(5000);
         const urlRegex = /(https?:\/\/[^\s]+)/;
         const match = lastEmail.match(urlRegex);
 

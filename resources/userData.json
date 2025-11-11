@@ -230,5 +230,61 @@
     "password": "1234",
     "phoneNumber": "01905201557",
     "address": "6799 Bergnaum Mission"
+  },
+  {
+    "firstName": "Jaylan",
+    "lastName": "Schuster",
+    "email": "teachercopilot123+212@gmail.com",
+    "password": "1234",
+    "phoneNumber": "01905255435",
+    "address": "37344 Reina Dale"
+  },
+  {
+    "firstName": "Lucio",
+    "lastName": "Block",
+    "email": "teachercopilot123+275@gmail.com",
+    "password": "1234",
+    "phoneNumber": "01905192915",
+    "address": "84900 Garden Street"
+  },
+  {
+    "firstName": "Beaulah",
+    "lastName": "D'Amore",
+    "email": "teachercopilot123+521@gmail.com",
+    "password": "1234",
+    "phoneNumber": "01905666277",
+    "address": "779 Spencer Underpass"
+  },
+  {
+    "firstName": "Hannah",
+    "lastName": "Herman",
+    "email": "teachercopilot123+263@gmail.com",
+    "password": "1234",
+    "phoneNumber": "01905274895",
+    "address": "5090 West Lane"
+  },
+  {
+    "firstName": "Jordane",
+    "lastName": "Weimann",
+    "email": "teachercopilot123+301@gmail.com",
+    "password": "1234",
+    "phoneNumber": "01905866535",
+    "address": "6785 Rowan Close"
+  },
+  {
+    "firstName": "Leslie",
+    "lastName": "Murray",
+    "email": "teachercopilot123+454@gmail.com",
+    "password": "1234",
+    "phoneNumber": "01905455854",
+    "address": "5776 Simone Ramp"
+  },
+  {
+    "firstName": "Eudora",
+    "lastName": "Jenkins",
+    "email": "teachercopilot123+914@gmail.com",
+    "password": "1234",
+    "phoneNumber": "01905601408",
+    "address": "909 Deon Ville"
   }
 ]

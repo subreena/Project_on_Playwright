@@ -12,13 +12,23 @@ export function generateRandomNumber(min: number, max: number){
 export function saveJsonData(jsonObject: UserModel, fileUrl:string):void{
     let dataArray: UserModel[] = userData;
     dataArray.push(jsonObject);
-    fs.writeFileSync(fileUrl, JSON.stringify(dataArray,null,2));
-    
+    fs.writeFileSync(fileUrl, JSON.stringify(dataArray,null,2))    
 }
 
 export function getLastUser(filePath:string):UserModel{
     let data = JSON.parse(fs.readFileSync(filePath,"utf-8"));
     return data[data.length-1];
+}
+
+export function updateJsonData(email:string,password:string, fileUrl:string):void{
+  let data = JSON.parse(fs.readFileSync(fileUrl,"utf-8"));
+ for(let i=0; i<data.length;i++){
+ if(data[i].email === email){
+    data[i].password = password;
+    break;  
+  }
+ }
+   fs.writeFileSync(fileUrl, JSON.stringify(data, null, 2), "utf-8");
 }
 
 export function saveEnv(

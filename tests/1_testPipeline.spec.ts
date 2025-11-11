@@ -2,7 +2,7 @@ import { test, expect, Page } from "@playwright/test";
 import { faker } from "@faker-js/faker";
 import { Registration } from "../pages/Registration.page";
 import { UserModel } from "../models/userModel";
-import { generateRandomNumber, getLastUser, reloadEnv, saveEnv, saveJsonData } from "../utils/Utils";
+import { generateRandomNumber, getLastUser, reloadEnv, saveEnv, saveJsonData, updateJsonData } from "../utils/Utils";
 import { readLatestEmail } from "../services/Gmail_Read.service";
 import { Login } from "../pages/Login.page";
 import { AddItem } from "../pages/AddItem.page";
@@ -12,6 +12,7 @@ import * as dotenv from "dotenv";
 import { UploadImage } from "../pages/UploadImage.page";
 dotenv.config({ override: true });
 import path from "path";
+import { get } from "http";
 
 
 test.describe.serial("User Registration", async () => {
@@ -96,7 +97,7 @@ test.describe.serial("User Registration", async () => {
         await logout.doLogout();
     })
 
-    const newPassword = "4321";
+    
     test("User can reset password", async () => {
         await page.goto('https://dailyfinance.roadtocareer.net/');
         const reset = new ResetPassword(page);
@@ -105,6 +106,8 @@ test.describe.serial("User Registration", async () => {
         await page.waitForTimeout(10000);
         let lastEmail = await readLatestEmail();
         console.log(lastEmail);
+        const newPassword = "4321";
+        updateJsonData(resetEmail, newPassword, "./resources/userData.json");
         await page.waitForTimeout(5000);
         const urlRegex = /(https?:\/\/[^\s]+)/;
         const match = lastEmail.match(urlRegex);
@@ -126,7 +129,7 @@ test.describe.serial("User Registration", async () => {
         await page.goto('https://dailyfinance.roadtocareer.net/');
         const newLogin = new Login(page);
         const email = getLastUser("./resources/userData.json").email;
-        const pass = newPassword;
+        const pass = getLastUser("./resources/userData.json").password;
 
         await newLogin.doLogin(email, pass);
         const uploadImage = new UploadImage(page);
@@ -138,6 +141,8 @@ test.describe.serial("User Registration", async () => {
         await page.waitForTimeout(5000);
         const src = await profileImage.getAttribute('src');
         expect(src).toContain('profileImage');
+
+        await newLogin.doLogout();
 
     })
 

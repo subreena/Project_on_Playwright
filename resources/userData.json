@@ -318,5 +318,21 @@
     "password": "1234",
     "phoneNumber": "01905883013",
     "address": "17194 Kunze Pass"
+  },
+  {
+    "firstName": "Cheyenne",
+    "lastName": "Jaskolski",
+    "email": "teachercopilot123+849@gmail.com",
+    "password": "4321",
+    "phoneNumber": "01905955182",
+    "address": "2912 Abbey Path"
+  },
+  {
+    "firstName": "Vladimir",
+    "lastName": "Beier",
+    "email": "teachercopilot123+699@gmail.com",
+    "password": "4321",
+    "phoneNumber": "01905742273",
+    "address": "2909 Reichert Ranch"
   }
 ]

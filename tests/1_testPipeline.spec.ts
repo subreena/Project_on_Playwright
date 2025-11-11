@@ -9,7 +9,6 @@ import { AddItem } from "../pages/AddItem.page";
 import { ItemModel } from "../models/ItemModel";
 import { ResetPassword } from "../pages/ResetPassword.page";
 import * as dotenv from "dotenv";
-import userData from '../resources/userData.json';
 import fs from 'fs';
 import path from 'path';
 
@@ -27,6 +26,9 @@ test.describe.serial("User Registration", async () => {
     test.afterAll(async () => {
         await page.close();
     })
+
+    const userDataPath = path.resolve('./resources/userData.json');
+    const userData = JSON.parse(fs.readFileSync(userDataPath, 'utf-8')); 
 
     test("Create New User", async () => {
         await page.goto("https://dailyfinance.roadtocareer.net/");

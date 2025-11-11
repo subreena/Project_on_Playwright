@@ -286,5 +286,37 @@
     "password": "1234",
     "phoneNumber": "01905601408",
     "address": "909 Deon Ville"
+  },
+  {
+    "firstName": "Aglae",
+    "lastName": "Harvey",
+    "email": "teachercopilot123+508@gmail.com",
+    "password": "1234",
+    "phoneNumber": "01905297847",
+    "address": "259 W Pine Street"
+  },
+  {
+    "firstName": "Alyson",
+    "lastName": "Orn",
+    "email": "teachercopilot123+787@gmail.com",
+    "password": "1234",
+    "phoneNumber": "01905556323",
+    "address": "5199 The Spinney"
+  },
+  {
+    "firstName": "Cheyenne",
+    "lastName": "Schulist",
+    "email": "teachercopilot123+328@gmail.com",
+    "password": "1234",
+    "phoneNumber": "01905977419",
+    "address": "8747 Dietrich Squares"
+  },
+  {
+    "firstName": "Kira",
+    "lastName": "Cremin",
+    "email": "teachercopilot123+431@gmail.com",
+    "password": "1234",
+    "phoneNumber": "01905883013",
+    "address": "17194 Kunze Pass"
   }
 ]

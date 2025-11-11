@@ -11,6 +11,7 @@ import { ResetPassword } from "../pages/ResetPassword.page";
 import * as dotenv from "dotenv";
 import { UploadImage } from "../pages/UploadImage.page";
 dotenv.config({ override: true });
+import path from "path";
 
 
 test.describe.serial("User Registration", async () => {
@@ -95,16 +96,16 @@ test.describe.serial("User Registration", async () => {
         await logout.doLogout();
     })
 
+    const newPassword = "4321";
     test("User can reset password", async () => {
         await page.goto('https://dailyfinance.roadtocareer.net/');
         const reset = new ResetPassword(page);
         let resetEmail = getLastUser("./resources/userData.json").email;
-        saveEnv("userEmail", resetEmail);
         await reset.doResetPassword(resetEmail)
         await page.waitForTimeout(10000);
         let lastEmail = await readLatestEmail();
         console.log(lastEmail);
-           await page.waitForTimeout(5000);
+        await page.waitForTimeout(5000);
         const urlRegex = /(https?:\/\/[^\s]+)/;
         const match = lastEmail.match(urlRegex);
 
@@ -112,7 +113,7 @@ test.describe.serial("User Registration", async () => {
             const resetUrl = new URL(match[0]);
             console.log("Navigating to:", resetUrl);
             await page.goto(resetUrl.href, { waitUntil: "domcontentloaded" });
-            const newPassword = "4321";
+           
             saveEnv("userPassword", newPassword);
             await reset.doInputNewPassword(newPassword);
         } else {
@@ -124,13 +125,13 @@ test.describe.serial("User Registration", async () => {
     test("User can upload image", async () => {
         await page.goto('https://dailyfinance.roadtocareer.net/');
         const newLogin = new Login(page);
-        reloadEnv();
-        const email = process.env.userEmail!;
-        const pass = process.env.userPassword!;
+        const email = getLastUser("./resources/userData.json").email;
+        const pass = newPassword;
 
         await newLogin.doLogin(email, pass);
         const uploadImage = new UploadImage(page);
-        await uploadImage.doUploadImage("./resources/profile_image.png");
+        const filePath = path.join(process.cwd(), 'resources', 'profile_image.png');
+        await uploadImage.doUploadImage(filePath);
 
         const profileImage = page.locator('img.profile-image');
         await expect(profileImage).toBeVisible();

@@ -8,7 +8,7 @@ async function fetchID(){
         extraHTTPHeaders: {
             "Accept" : "*/*",
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${process.env.google_access_token}`,
+            "Authorization": `Bearer ${process.env.GOOGLE_ACCESS_TOKEN}`,
          }
     });
     const response = await api.get("/gmail/v1/users/me/messages");
@@ -24,7 +24,7 @@ export async function readLatestEmail() {
         extraHTTPHeaders: {
             "Accept" : "*/*",
             "Content-Type":"application/json",
-            "Authorization": `Bearer ${process.env.google_access_token}`
+            "Authorization": `Bearer ${process.env.GOOGLE_ACCESS_TOKEN}`
         }
     });
 

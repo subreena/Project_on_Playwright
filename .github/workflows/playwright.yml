@@ -33,6 +33,9 @@ jobs:
       # 5️⃣ Run Playwright tests
       - name: Run Playwright tests
         run: npx playwright test --reporter=html
+        env:
+          CI: true
+          google_access_token: ${{ secrets.google_access_token }}
 
       # 6️⃣ Upload Playwright HTML report (optional)
       - uses: actions/upload-artifact@v4
